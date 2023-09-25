@@ -7,21 +7,28 @@ public class CeaserCipher {
         //make a StringBuilder with a message (encrypted)
         StringBuilder encrypted = new StringBuilder(input);
         //write alphabet
-        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String alphabetUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String alphabetLower = "abcdefghijklmnopqrstuvwxyz";
         //compute the shifted alphabet
-        String shiftedAlphabet = alphabet.substring(key) + alphabet.substring(0,key);
+        String shiftedAlphabetUpper = alphabetUpper.substring(key) + alphabetUpper.substring(0,key);
+        String shiftedAlphabetLower = alphabetLower.substring(key) + alphabetLower.substring(0,key);
         //count from 0 to < length of encrypted (i)
         for (int i = 0;i < encrypted.length(); i++) {
             //Look at the ith character of the encrypted (currChar)
             char currChar = encrypted.charAt(i);
             //Find the index of currChar in the alphabet (idx)
-            int idx = alphabet.indexOf(currChar);
+            int idxUpper = alphabetUpper.indexOf(currChar);
+            int idxLower = alphabetLower.indexOf(currChar);
             //If currChar is inthe alphabet
-            if (idx != -1) {
+            if (idxUpper != -1) {
                 //Get the idxth character of the shiftedAlphabet(newChar)
-                char newChar = shiftedAlphabet.charAt(idx);
+                char newChar = shiftedAlphabetUpper.charAt(idxUpper);
                 //Replace the ith character of the encrypted with newChar
                 encrypted.setCharAt(i, newChar);
+            } else if (idxLower != -1) {
+                char newChar = shiftedAlphabetLower.charAt(idxLower);
+                encrypted.setCharAt(i, newChar);
+
             }
 
             //Otherwise:do nothing
